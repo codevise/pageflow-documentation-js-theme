@@ -5,8 +5,8 @@ var fs = require('fs'),
   _ = require('lodash'),
   concat = require('concat-stream'),
   GithubSlugger = require('github-slugger'),
-  createFormatters = require('../').util.createFormatters,
-  LinkerStack = require('../').util.LinkerStack,
+  createFormatters = require('documentation').util.createFormatters,
+  LinkerStack = require('documentation').util.LinkerStack,
   hljs = require('highlight.js');
 
 function isFunction(section) {
