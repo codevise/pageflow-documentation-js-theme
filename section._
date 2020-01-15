@@ -160,7 +160,7 @@
   <% } %>
 
   <% if (section.members.static && section.members.static.length) { %>
-    <div class='py1 quiet mt1 prose-big'>Static Members</div>
+    <div class='py1 quiet mt1 prose-big'>Members</div>
     <%= renderSectionList({ members: section.members.static, renderSection: renderSection, renderParamProperty: renderParamProperty, noun: 'Static Member' }) %>
   <% } %>
 
