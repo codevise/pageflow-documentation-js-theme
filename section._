@@ -41,7 +41,33 @@
   <% if (section.copyright) { %><div>Copyright: <%= md(section.copyright, true) %></div><% }%>
   <% if (section.since) { %><div>Since: <%- section.since %></div><% }%>
 
-  <% if (section.params && section.params.length) { %>
+  <% if (isComponent(section)) { %>
+    <div class='py1 quiet mt1 prose-big'>Props</div>
+    <div class='prose'>
+      <div class='space-bottom0'>
+        <table class='mt1 mb2 fixed-table h5 col-12'>
+          <colgroup>
+            <col width='30%' />
+            <col width='70%' />
+          </colgroup>
+          <thead>
+            <tr class='bold fill-light'>
+              <th>Name</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody class='mt1'>
+            <% getComponentProps(section).forEach(function(property) { %>
+              <%= renderParamProperty({
+                property: property,
+                renderParamProperty: renderParamProperty
+              }) %>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  <% } else if (section.params && section.params.length) { %>
     <div class='py1 quiet mt1 prose-big'>Parameters</div>
     <div class='prose'>
       <% section.params.forEach(function(param) { %>

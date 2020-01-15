@@ -18,6 +18,29 @@ function isFunction(section) {
   );
 }
 
+function isComponent(section) {
+  return (
+    section.kind === 'class' &&
+    section.params &&
+    section.params.length === 1 &&
+    section.params[0] &&
+    section.params[0].name === 'props'
+  );
+}
+
+function getComponentProps(section) {
+  return section.params[0].properties.map(property => ({
+    ...property,
+    name: property.name.replace('props.', '')
+  }));
+}
+
+function componentSignature(section, formatters, short) {
+  return '&lt;' + section.name + ' ' +
+         formatters.parameters({params: getComponentProps(section)}, short).replace(/[)(,]/g, '') +
+         ' /&gt;';
+}
+
 module.exports = function(comments, config) {
   var linkerStack = new LinkerStack(config).namespaceResolver(
     comments,
@@ -33,12 +56,17 @@ module.exports = function(comments, config) {
 
   var sharedImports = {
     imports: {
+      isComponent,
+      getComponentProps,
       slug(str) {
         var slugger = new GithubSlugger();
         return slugger.slug(str);
       },
       shortSignature(section) {
         var prefix = '';
+        if (isComponent(section)) {
+          return componentSignature(section, formatters, true);
+        }
         if (section.kind === 'class') {
           prefix = 'new ';
         } else if (!isFunction(section)) {
@@ -49,6 +77,9 @@ module.exports = function(comments, config) {
       signature(section) {
         var returns = '';
         var prefix = '';
+        if (isComponent(section)) {
+          return componentSignature(section, formatters);
+        }
         if (section.kind === 'class') {
           prefix = 'new ';
         } else if (!isFunction(section)) {
