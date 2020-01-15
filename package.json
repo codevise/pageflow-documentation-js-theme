@@ -1,0 +1,8 @@
+{
+  "name": "pageflow-documentation-js-theme",
+  "version": "1.0.0",
+  "description": "Documentation.js theme used by Pageflow docs.",
+  "main": "index.js",
+  "author": "Codevise Solutions GmbH <info@codevise.de>",
+  "license": "MIT"
+}
