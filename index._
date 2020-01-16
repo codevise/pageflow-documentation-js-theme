@@ -83,9 +83,6 @@
               <% }) %>
             </ul>
           </div>
-          <div class='mt1 h6 quiet'>
-            <a href='https://documentation.js.org/reading-documentation.html'>Need help reading this?</a>
-          </div>
         </div>
       </div>
       <div id='split-right' class='relative overflow-auto height-viewport-100'>
