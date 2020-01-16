@@ -90,6 +90,11 @@ code,
   font-size: 14px;
 }
 
+pre {
+  background: #f9f9f9;
+  padding: 0.5rem;
+}
+
 .fill-light {
   background: #f9f9f9;
 }
