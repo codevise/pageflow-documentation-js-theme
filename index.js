@@ -105,6 +105,24 @@ module.exports = function(comments, config) {
         return formatters.markdown(ast);
       },
       formatType: formatters.type,
+      formatParamName(param) {
+        if (formatters.type(param.type).startsWith('...')) {
+          var comps = param.name.split('.');
+          comps.shift();
+          console.log(param);
+          return '...' + comps.join('.');
+        }
+        return param.name;
+      },
+      formatParamType(type) {
+        var result = formatters.type(type);
+
+        if (result === '...any') {
+          return '';
+        }
+
+        return result;
+      },
       autolink: formatters.autolink,
       highlight(example) {
         if (config.hljs && config.hljs.highlightAuto) {
