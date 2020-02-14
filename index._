@@ -39,7 +39,7 @@
                       <li><a
                         href='#<%=slug(member.namespace)%>'
                         class='regular pre-open'>
-                        <%- member.name %>
+                        <%- dotNameHack(member.name) %>
                       </a></li>
                     <% }) %>
                     </ul>

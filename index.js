@@ -41,6 +41,10 @@ function componentSignature(section, formatters, short) {
          ' /&gt;';
 }
 
+function dotNameHack(name) {
+  return name.replace('_', '.');
+}
+
 module.exports = function(comments, config) {
   var linkerStack = new LinkerStack(config).namespaceResolver(
     comments,
@@ -64,6 +68,7 @@ module.exports = function(comments, config) {
       },
       shortSignature(section) {
         var prefix = '';
+        section.name = dotNameHack(section.name);
         if (isComponent(section)) {
           return componentSignature(section, formatters, true);
         }
@@ -77,6 +82,7 @@ module.exports = function(comments, config) {
       signature(section) {
         var returns = '';
         var prefix = '';
+        section.name = dotNameHack(section.name);
         if (isComponent(section)) {
           return componentSignature(section, formatters);
         }
@@ -129,7 +135,8 @@ module.exports = function(comments, config) {
           return hljs.highlightAuto(example).value;
         }
         return hljs.highlight('js', example).value;
-      }
+      },
+      dotNameHack
     }
   };
 
